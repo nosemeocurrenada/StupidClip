@@ -20,11 +20,10 @@ def get_new_msg():
     return o.get_new_messages ()
 
 
-def get_all_msg(n):
+def get_all_msg(n = None):
     """Devuelve los ultimos n mensajes en la lista, si n no esta
     especificado (o es None), devuelve todos."""
-    pass
-
+    return o.get_all_messages (n)
 
 def options_get(key):
     """Devuelve el valor de la opcion con clave especificada."""
@@ -46,7 +45,7 @@ def profile_set(key, value):
     pass
 
 
-def init(clean = False):
+def init():
     """Informa que la aplicacion ha iniciado."""
     from main import MainClass
     global o

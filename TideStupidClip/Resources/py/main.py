@@ -12,6 +12,11 @@ class MainClass:
         self.index = len(self.messages) - 1
         return msg
     
+    def get_all_messages (self, n):
+        if not n: #It could be None
+            n = 0
+        return self.messages[-n:]
+    
     def execute_command(self, cmd):
         self.action_manager.execute(cmd)
     

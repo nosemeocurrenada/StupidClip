@@ -22,6 +22,12 @@ class Test(unittest.TestCase):
         from datetime import datetime
         self.assertTrue(type(messages[0]) is datetime, "Should return a date")
 
+    def testGetsAllMessages(self):
+        interface.cmd("Dame la hora")
+        interface.cmd("Dame la hora")
+        
+        messages = interface.get_all_msg()
+        self.assertEqual(2, len(messages), "There should be two messages")
 if __name__ == "__main__":
     #import sys;sys.argv = ['', 'Test.testGetsTime']
     unittest.main()
