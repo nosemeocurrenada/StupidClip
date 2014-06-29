@@ -12,6 +12,10 @@ App = Ember.Application.create({
     tray: null,
     ready: function() {
         logger.log("app is ready");
+        logger.log("init python");
+        window.py.init(Ti.Filesystem.getApplicationDataDirectory().nativePath());
+        logger.log("python ready");
+
         var me = this;
         var tray = Ti.UI.addTray("app://app_logo.png", function() {
             me.trayClicked();
@@ -109,6 +113,14 @@ App.IdleRoute = Ember.Route.extend({
         //update
         this.set("update", window.setInterval(function() {
             logger.log("idle update");
+            //
+            // TODO: aca va el update del idle
+            // chequear por mensajes y cambiar a notification
+            //
+
+            //window.py.update();
+            //window.py.get_new_msg();
+
         }, 1000));
     },
     deactivate: function() {
@@ -119,6 +131,14 @@ App.IdleRoute = Ember.Route.extend({
     showEvent: null
 });
 
+
+App.ChatModel = Ember.Object.extend({
+    messages: [],
+    init: function() {
+        this.set("messages", window.py.get_all_msg(20));
+    }
+});
+
 App.ChatRoute = Ember.Route.extend({
     activate: function() {
         var me = this;
@@ -127,11 +147,33 @@ App.ChatRoute = Ember.Route.extend({
             me.transitionTo("idle");
         });
         windowHideEvent.add(this.get("hideEvent"));
+        //update
+        this.set("update", window.setInterval(function() {
+            logger.log("chat update");
+            //
+            // TODO: aca va el update del chat
+            // chequear por mensajes
+            //
+
+            window.py.update();
+
+            msgs = window.py.get_new_msg();
+
+            if (msgs.length > 0) {
+                alert("hay mensajes nuevos");
+            }
+
+        }, 1000));
     },
     deactivate: function() {
         windowHideEvent.remove(this.get("hideEvent"));
+        window.clearInterval(this.get("update"));
     },
-    hideEvent: null
+    update: null,
+    hideEvent: null,
+    model: function() {
+        return App.ChatModel.create();
+    }
 });
 
 App.OptionsRoute = Ember.Route.extend({
