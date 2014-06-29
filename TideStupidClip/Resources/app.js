@@ -138,10 +138,6 @@ App.IdleRoute = Ember.Route.extend({
         //update
         this.set("update", window.setInterval(function() {
             logger.log("idle update");
-            //
-            // TODO: aca va el update del idle
-            // chequear por mensajes y cambiar a notification
-            //
 
             window.py.update();
 
@@ -196,10 +192,6 @@ App.ChatRoute = Ember.Route.extend({
         //update
         this.set("update", window.setInterval(function() {
             logger.log("chat update");
-            //
-            // TODO: aca va el update del chat
-            // chequear por mensajes
-            //
 
             window.py.update();
 
@@ -297,6 +289,39 @@ App.NotificationRoute = Ember.Route.extend({
     model: function() {
         return uniqueChatModelInstance;
     },
+    activate: function() {
+        var me = this;
+        //update
+        this.set("update", window.setInterval(function() {
+            logger.log("notification update");
+            window.py.update();
+
+            var msgs = window.py.get_new_msg();
+
+            if (msgs.length > 0) {
+                try {
+                    logger.log("hubo mensajes nuevos")
+                    var m = me.modelFor("chat");
+                    m.set("lastMessages", msgs);
+                    msgs.forEach(function(e) {
+                        m.messages.pushObject(e);
+                    });
+                    var c = m.messages.length - 12;
+                    if (c > 0)
+                        m.messages.removeAt(0, c);
+
+                    //alert("hay mensajes nuevos");
+                } catch (err) {
+                    logger.log(err);
+                }
+            }
+
+        }, 1000));
+    },
+    deactivate: function() {
+        window.clearInterval(this.get("update"));
+    },
+    update: null,
 })
 
 
