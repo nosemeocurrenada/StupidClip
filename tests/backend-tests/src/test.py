@@ -13,18 +13,18 @@ class Test(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def testGetsTime(self):
-        interface.cmd("Dame la hora")
+    def testSaysHi(self):
+        interface.cmd("Hola")
         messages = interface.get_new_msg()
-        self.assertEqual(2, len(messages), "It should have only one message")
-        self.assertEqual(2, len(messages [1].message.split(":")), "Should return a date with format HH:MM")
+        self.assertEqual(2, len(messages), "It should have two messages")
+        self.assertTrue("hola" in messages [1], "Should say hi")
 
     def testGetsAllMessages(self):
         interface.cmd("Dame la hora")
         interface.cmd("Dame la hora")
         
         messages = interface.get_all_msg()
-        self.assertEqual(4, len(messages), "There should be two messages")
+        self.assertEqual(4, len(messages), "There should be four messages")
 if __name__ == "__main__":
     #import sys;sys.argv = ['', 'Test.testGetsTime']
     unittest.main()

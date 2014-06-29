@@ -27,18 +27,10 @@ class MainClass:
         return self.message_manager.get_all_messages(n)
         
     def execute_command(self, cmd):
-        cmd = cmd.lower()
         from UserMessage import UserMessage
         self.message_manager.add(UserMessage(cmd))
-        return self.action_manager.execute(cmd)
-    
-    def _get_time(self, *args):
-        now = datetime.now()
-        s = now.strftime("%H:%S")
-        from SystemMessage import SystemMessage
-        m = SystemMessage(s)
-        self.message_manager.add(m)
-    
+        return self.action_manager.execute(cmd.lower())
+        
     def _add_task(self, *args):
         t = datetime.now() + timedelta(seconds = 5)
         from UserMessage import UserMessage
@@ -67,8 +59,9 @@ class MainClass:
         self.message_manager.add(UserMessage("Hola, " + self.profile["name"]))
     
     def _dirty_add_actions(self):
+        from GetTimeAction import GetTimeAction
         from StringAction import StringAction
-        act = StringAction(self._get_time,"Dame la hora")
+        act = GetTimeAction(self.message_manager)
         self.action_manager.add(act)
         act = StringAction(self._add_task,"Recordame","Recordarme")
         self.action_manager.add(act)

@@ -24,11 +24,11 @@ class ActionManager ():
                 
         from SystemMessage import SystemMessage
         if len(res) > 1:
-            s = "Ambiguity: " + "[" + ",".join([e.name for e in res]) + "]"
+            s = "¿A cual de los siguientes refiere?: " + "[" + ",".join([e.name for e in res]) + "]"
             m = SystemMessage(s)
             self.message_manager.add(m)
             return None
         if len(res) == 1:
             return res [0]
-        self.message_manager.add (SystemMessage("Command not found: " + s))
+        self.message_manager.add (SystemMessage("No entiendo"))
         return None 
