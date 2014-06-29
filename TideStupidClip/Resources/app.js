@@ -336,6 +336,7 @@ Ws = Em.Namespace.create();
 Ws.FocusableTextField = Em.TextField.extend({
     didInsertElement: function() {
         this.$().focus();
+        this.$().attr("size", 39);
     },
     focusOut: function() {
         logger.log("focused out");

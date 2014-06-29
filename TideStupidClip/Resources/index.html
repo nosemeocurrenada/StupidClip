@@ -21,15 +21,30 @@
             <div class="scvista">
                 <div class="sctabs">
                     <div class="scfaceon"></div>
-                    <div class="scgireoff"></div>
+                    <div class="scgireoff">
+                        {{#link-to 'options'}} Opt {{/link-to}}
+                    </div>
                 </div>
                 <div class="scclear"></div>
                 <div class="sccontent">
                     <div class="scmessages">
-                        <div class="scinernalshadow"></div>
+                        <div class="scinernalshadow">
+                            
+
+                            {{#each msg in model.messages }}
+                                <div class="scmessage">
+                                    {{msg.message}}
+                                </div>
+                            {{/each}}
+
+                        </div>
                     </div>
                     <div class="sctextfield">
-                        <div class="scinernalshadow"></div>
+                        <div class="scinernalshadow">
+                            
+                            {{view Ws.FocusableTextField enterPress="sendCommand" value=command}}
+
+                        </div>
                     </div>
                 </div>
             </div>
@@ -44,16 +59,12 @@
         <script type="text/x-handlebars" id="chat_ok">
 
             <div style="padding: 20px">
-                {{#link-to 'options'}} Options {{/link-to}}
                 <a>chat</a>
             </div>
             <div style="padding: 20px">
-                {{#each msg in model.messages }}
-                    <span>{{msg.message}}</span><br/>
-                {{/each}}
             </div>
             <div style="padding: 20px">
-                {{view Ws.FocusableTextField enterPress="sendCommand" value=command}}
+                
             </div>
 
 		</script>

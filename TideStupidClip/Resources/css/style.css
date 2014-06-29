@@ -6,6 +6,7 @@
 
 body {
   font-size:14px;
+  font-family: "Arial";
 }
 
 /* ITALIC PANIC */
@@ -34,6 +35,9 @@ body, html {
 
 	border-top-right-radius: 3px;
 	border-top-left-radius: 3px;
+
+	border-top: 1px solid #DDD;
+	border-left: 1px solid #DDD;	
 }
 
 .scgireoff {
@@ -45,6 +49,9 @@ body, html {
 
 	border-top-right-radius: 3px;
 	border-top-left-radius: 3px;
+
+	border-top: 1px solid #999;
+	border-left: 1px solid #999;	
 }
 
 .sccontent {
@@ -52,10 +59,14 @@ body, html {
 	width: 300px;
 	height: 370px;
 	clear: both;
+
 	padding-top: 14px;
 
 	border-top-right-radius: 5px;
 	border-top-left-radius: 5px;
+
+	border-top: 1px solid #DDD;
+	border-left: 1px solid #DDD;	
 }
 
 .scmessages {
@@ -80,7 +91,7 @@ body, html {
 	margin-top: 14px;
 	margin-bottom: 7px;
 	width: 272px;
-	height: 30px;
+	height: 22px;
 
 	border-top-right-radius: 3px;
 	border-top-left-radius: 3px;
@@ -91,4 +102,22 @@ body, html {
 	height: 100%;
 	border-top: 1px solid gray;
 	border-left: 1px solid gray;
+}
+
+.scinternallight {
+	width: 100%;
+	height: 100%;
+	border-top: 1px solid white;
+	border-left: 1px solid white;	
+}
+
+.sctoppadding {
+	width: 100%;
+	height: 100%;
+}
+
+.scmessage {
+	padding: 3px;
+	background-color: #FEFEFE;
+	margin: 3px;
 }
