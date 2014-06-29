@@ -16,9 +16,10 @@ class MainClass:
         return self.message_manager.get_all_messages(n)
         
     def execute_command(self, cmd):
+        cmd = cmd.lower()
         from UserMessage import UserMessage
         self.message_manager.add(UserMessage(cmd))
-        self.action_manager.execute(cmd)
+        return self.action_manager.execute(cmd)
     
     def _get_time(self):
         now = datetime.now()
@@ -36,13 +37,18 @@ class MainClass:
         self.message_manager.add(UserMessage("Ok, te aviso en 5s"))
         
     def update(self):
+        torem = []
         for task in self.tasks:
             if datetime.now() > task["time"]:
                 self.message_manager.add(task["message"])
+                torem.append(task)
+                
+        for task in torem:
+            self.tasks.remove(task)
     
     def _dirty_add_actions(self):
         from StringAction import StringAction
         act = StringAction(self._get_time,"Dame la hora")
         self.action_manager.add(act)
-        act = StringAction(self._add_task,"Recordame")
+        act = StringAction(self._add_task,"Recordame","Recordarme")
         self.action_manager.add(act)
