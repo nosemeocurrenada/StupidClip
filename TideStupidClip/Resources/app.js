@@ -102,8 +102,7 @@ App.IndexController = Ember.Controller.extend({
         },
         testPython: function() {
             logger.log("python test");
-            var s = window.testPython();
-            s = s + " " + window.transformString("Asereje ñ");
+            var s = window.py.cmd("");
             alert(s);
         }
     }

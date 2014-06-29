@@ -27,11 +27,22 @@
 		</div>
 		</script>
 
-        <script type="text/python">
-            import myfile
+        <script>
+            window.py = {}
+        </script>
 
-            window.testPython = myfile.testPython
-            window.transformString = myfile.transformString
+        <script type="text/python">
+            from py import interface
+
+            window.py.update = interface.update
+            window.py.cmd = interface.cmd
+            window.py.get_new_msg = interface.get_new_msg
+            window.py.get_all_msg = interface.get_all_msg
+            window.py.options_get = interface.options_get
+            window.py.options_set = interface.options_set
+            window.py.profile_get = interface.profile_get
+            window.py.profile_set = interface.profile_set
+            window.py.init = interface.init
 
         </script>
 

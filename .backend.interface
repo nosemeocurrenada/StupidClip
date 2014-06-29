@@ -21,7 +21,7 @@ options_set (key, value):
 profile_get (key):
   Devuelve el valor del campo de perfil con la clave especificada.
   
-options_set (key, value):
+profile_set (key, value):
   Asigna value al campo de perfil con la clave especificada.
   
 init ():
