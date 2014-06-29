@@ -45,7 +45,7 @@ def profile_set(key, value):
     pass
 
 
-def init():
+def init(dir):
     """Informa que la aplicacion ha iniciado."""
     from main import MainClass
     global o
