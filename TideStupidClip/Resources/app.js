@@ -103,7 +103,11 @@ App.ChatRoute = Ember.Route.extend({
     }
 });
 
-App.ChatController = Ember.Controller.extend({
+App.OptionsRoute = Ember.Route.extend({
+
+});
+
+App.OptionsController = Ember.Controller.extend({
     actions: {
         closeApp: function() {
             logger.log("closing app");

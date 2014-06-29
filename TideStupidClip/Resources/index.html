@@ -17,14 +17,31 @@
 		</script>
 		
 		<script type="text/x-handlebars" id="chat">
-		<div style="padding: 20px">
-			<div>
-            <p>This is a sample application showing python functionality</p>
-			</div>
-			<button {{action "closeApp"}}>exit</button>
-            <button {{action "testPython"}}>Test python</button>
-		</div>
+            <div style="padding: 20px">
+                {{#link-to 'options'}} Options {{/link-to}}
+                <a>chat</a>
+            </div>
+    		<div style="padding: 20px">
+    			<div>
+                <p>This is the chat panel</p>
+    			</div>
+    		</div>
 		</script>
+
+        <script type="text/x-handlebars" id="options">
+            <div style="padding: 20px">
+                <a>options</a>,
+                {{#link-to 'chat'}} Chat {{/link-to}}
+            </div>
+            <div style="padding: 20px">
+                <div>
+                <p>This is the options panel</p>
+                </div>
+                <button {{action "closeApp"}}>exit</button>
+            </div>
+        </script>
+
+
 
         <script>
             window.py = {}
