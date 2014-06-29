@@ -22,10 +22,13 @@
                 <a>chat</a>
             </div>
     		<div style="padding: 20px">
-    			<div>
-                <p>This is the chat panel</p>
-    			</div>
+                {{#each msg in model.messages }}
+                    <p>{{msg}}</p>
+                {{/each}}
     		</div>
+            <div style="padding: 20px">
+                <button {{action "sendMessage"}}>send message</button>
+            </div>
 		</script>
 
         <script type="text/x-handlebars" id="options">

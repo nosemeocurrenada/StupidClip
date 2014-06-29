@@ -137,7 +137,7 @@ App.ChatModel = Ember.Object.extend({
     init: function() {
         logger.log("inicializando chat model");
         var msgs = window.py.get_all_msg();
-        this.set("messages", []);
+        this.set("messages", msgs.slice(-20));
         logger.log("chat model correctamente inicializado");
     }
 });
@@ -163,7 +163,11 @@ App.ChatRoute = Ember.Route.extend({
             var msgs = window.py.get_new_msg();
 
             if (msgs.length > 0) {
-                alert("hay mensajes nuevos");
+                logger.log("hubo mensajes nuevos")
+                var m = me.get("model.messages");
+                m.push(msgs);
+                me.set("model.messages", m);
+                //alert("hay mensajes nuevos");
             }
 
         }, 1000));
@@ -176,6 +180,15 @@ App.ChatRoute = Ember.Route.extend({
     hideEvent: null,
     model: function() {
         return App.ChatModel.create();
+    }
+});
+
+App.ChatController = Ember.ObjectController.extend({
+    actions: {
+        sendMessage: function() {
+            logger.log("enviando mensaje dame la hora");
+            window.py.cmd("Dame la hora");
+        }
     }
 });
 
