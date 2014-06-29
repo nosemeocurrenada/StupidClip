@@ -13,7 +13,7 @@ class ReminderAction(RegexAction):
         
     def _schelude_task(self, action, number, unit):
         import re
-        action, number, unit = re.match(self.pattern,args[0]).groups()
+        #action, number, unit = re.match(self.pattern,args[0]).groups()
         
         from datetime import datetime, timedelta
         now = datetime.now()
