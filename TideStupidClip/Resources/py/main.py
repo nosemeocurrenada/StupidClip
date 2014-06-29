@@ -1,11 +1,10 @@
 from datetime import datetime, timedelta
 class MainClass:
-    
+
     def __init__(self, dir):
         self.message_manager = self._create_message_manager(None)
         from action_manager import ActionManager
         self.action_manager = ActionManager(self.message_manager)
-        self._dirty_add_actions()
         self.tasks = []
         
         if dir:
@@ -19,6 +18,8 @@ class MainClass:
             
             if not self.profile.has_key("name"):
                 self.profile["name"] = "DefaultCarlos"
+                
+        self._dirty_add_actions()
     
     def get_new_messages (self):
         return self.message_manager.get_new_messages()
@@ -33,11 +34,11 @@ class MainClass:
         
     def _add_task(self, *args):
         t = datetime.now() + timedelta(seconds = 5)
-        from UserMessage import UserMessage
-        m = UserMessage(self.profile["name"] + ", no te duermas.")
+        from SystemMessage import SystemMessage
+        m = SystemMessage(self.profile["name"] + ", no te duermas.")
         task = {'time':t,'message':m}
         self.tasks.append(task)
-        self.message_manager.add(UserMessage("Ok, te aviso en 5s"))
+        self.message_manager.add(SystemMessage("Ok, te aviso en 5s"))
         
     def update(self):
         torem = []
@@ -51,17 +52,20 @@ class MainClass:
 
     def _set_name_to_carlos(self, *args):
         self.profile_set("name","Carlos")
-        from UserMessage import UserMessage
-        self.message_manager.add(UserMessage("Ok, ahora te llamas Carlos."))
+        from SystemMessage import SystemMessage
+        self.message_manager.add(SystemMessage("Ok, ahora te llamas Carlos."))
     
     def _say_hi(self, *args):
-        from UserMessage import UserMessage
-        self.message_manager.add(UserMessage("Hola, " + self.profile["name"]))
+        from SystemMessage import SystemMessage
+        self.message_manager.add(SystemMessage("Hola, " + self.profile["name"]))
     
     def _dirty_add_actions(self):
         from GetTimeAction import GetTimeAction
         from StringAction import StringAction
-        act = GetTimeAction(self.message_manager)
+        from ReminderAction import ReminderAction
+        act = GetTimeAction(self)
+        self.action_manager.add(act)
+        act = ReminderAction(self)
         self.action_manager.add(act)
         act = StringAction(self._add_task,"Recordame","Recordarme","Recuerdame")
         self.action_manager.add(act)
@@ -69,7 +73,6 @@ class MainClass:
         self.action_manager.add(act)
         act = StringAction(self._say_hi,"Hola")
         self.action_manager.add(act)
-
 
     def profile_set(self,key,value):
         self.profile[key] = value
@@ -92,7 +95,7 @@ class MainClass:
         from MessageManager import MessageManager
         print "Mensajes sin persistencia"
         return MessageManager()
-    
+
 if __name__ == "__main__":
     m = MainClass(".")
     m.execute_command("Dame la hora")
