@@ -9,7 +9,7 @@ class MainClass:
     
     def get_new_messages (self):
         msg = self.messages[self.index:]
-        self.index = len(self.messages) - 1
+        self.index = len(self.messages)
         return msg
     
     def get_all_messages (self, n = None):
