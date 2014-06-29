@@ -16,7 +16,7 @@ class StringAction(Action):
         """
         self.matchers = []
         for m in matchers:
-            self.matchers.append(m)
+            self.matchers.append(m.lower())
         Action.__init__(self, command)
     
     def matches(self, s):
