@@ -5,6 +5,9 @@ Ember.onerror = function(error) {
     throw error;
 };
 
+var windowShowEvent = $.Callbacks();
+var windowHideEvent = $.Callbacks();
+
 App = Ember.Application.create({
     tray: null,
     ready: function() {
@@ -35,11 +38,13 @@ App = Ember.Application.create({
         }
     },
     hideWindow: function() {
+        windowHideEvent.fire();
         logger.log("hidding window");
         var w = Ti.UI.getMainWindow();
         w.hide();
     },
     showWindow: function() {
+        windowShowEvent.fire();
         logger.log("showing window");
         var w = Ti.UI.getMainWindow();
         w.show();
@@ -60,6 +65,7 @@ App = Ember.Application.create({
     },
     lostFocusRecently: false,
     lostFocus: function() {
+        windowHideEvent.fire();
         this.set("lostFocusRecently", true);
         logger.log("lost focus");
         var w = Ti.UI.getMainWindow();
@@ -73,7 +79,13 @@ App = Ember.Application.create({
     }
 });
 
+App.ApplicationController = Ember.Controller.extend({
+
+
+});
+
 App.Router.map(function() {
+    this.route("idle");
     this.route("chat");
     this.route("options");
     this.route("notification");
@@ -81,30 +93,60 @@ App.Router.map(function() {
 
 App.IndexRoute = Ember.Route.extend({
     beforeModel: function() {
-        this.transitionTo('chat');
+        this.transitionTo('idle');
     }
+});
+
+App.IdleRoute = Ember.Route.extend({
+    activate: function() {
+        //show event
+        var me = this;
+        this.set("showEvent", function() {
+            logger.log("transisionando al chat");
+            me.transitionTo("chat");
+        });
+        windowShowEvent.add(this.get("showEvent"));
+        //update
+        this.set("update", window.setInterval(function() {
+            logger.log("idle update");
+        }, 1000));
+    },
+    deactivate: function() {
+        windowShowEvent.remove(this.get("showEvent"));
+        window.clearInterval(this.get("update"));
+    },
+    update: null,
+    showEvent: null
 });
 
 App.ChatRoute = Ember.Route.extend({
-    model: function() {
-        /*
-        var m = App.TaskList.create();
-        logger.log("modelo creado");
-        return m;
-        */
+    activate: function() {
+        var me = this;
+        this.set("hideEvent", function() {
+            logger.log("transisionando a idle");
+            me.transitionTo("idle");
+        });
+        windowHideEvent.add(this.get("hideEvent"));
     },
-    setupController: function(controller, m) {
-        /*
-        logger.log("seteando modelo del controlador");
-        logger.debug("this is the controller: " + controller);
-        logger.debug("model name: " + m.name);
-        controller.set("model", m);
-        */
-    }
+    deactivate: function() {
+        windowHideEvent.remove(this.get("hideEvent"));
+    },
+    hideEvent: null
 });
 
 App.OptionsRoute = Ember.Route.extend({
-
+    activate: function() {
+        var me = this;
+        this.set("hideEvent", function() {
+            logger.log("transisionando a idle");
+            me.transitionTo("idle");
+        });
+        windowHideEvent.add(this.get("hideEvent"));
+    },
+    deactivate: function() {
+        windowHideEvent.remove(this.get("hideEvent"));
+    },
+    hideEvent: null
 });
 
 App.OptionsController = Ember.Controller.extend({
@@ -118,6 +160,15 @@ App.OptionsController = Ember.Controller.extend({
             var s = window.py.cmd("");
             alert(s);
         }
+    },
+    init: function() {
+        logger.log("agregando handler de hide")
+        windowHideEvent.add(function() {
+            logger.log("got hidden");
+        });
+        windowShowEvent.add(function() {
+            logger.log("got shown");
+        });
     }
 });
 
