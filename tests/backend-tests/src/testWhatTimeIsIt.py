@@ -27,6 +27,9 @@ class Test(unittest.TestCase):
     def testCase4(self):
         s = "Dame la caja"
         self.assertFalse(self.act.matches(s), s)
+    def testCase5(self):
+        s = "Dame la cahoraja"
+        self.assertTrue(self.act.matches(s), s)
 
 if __name__ == "__main__":
     #import sys;sys.argv = ['', 'Test.testName']

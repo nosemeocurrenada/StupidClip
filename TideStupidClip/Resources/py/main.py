@@ -63,7 +63,7 @@ class MainClass:
         from StringAction import StringAction
         act = GetTimeAction(self.message_manager)
         self.action_manager.add(act)
-        act = StringAction(self._add_task,"Recordame","Recordarme")
+        act = StringAction(self._add_task,"Recordame","Recordarme","Recuerdame")
         self.action_manager.add(act)
         act = StringAction(self._set_name_to_carlos,"Dime Carlos")
         self.action_manager.add(act)

@@ -24,7 +24,7 @@ class ActionManager ():
                 
         from SystemMessage import SystemMessage
         if len(res) > 1:
-            s = "¿A cual de los siguientes refiere?: " + "[" + ",".join([e.name for e in res]) + "]"
+            s = "A cual de los siguientes refiere?: " + "[" + ",".join([e.name for e in res]) + "]"
             m = SystemMessage(s)
             self.message_manager.add(m)
             return None
