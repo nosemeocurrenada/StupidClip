@@ -9,7 +9,7 @@ import unittest
 class Test(unittest.TestCase):
 
     def setUp(self):
-        interface.init("")
+        interface.init(".")
 
     def tearDown(self):
         pass

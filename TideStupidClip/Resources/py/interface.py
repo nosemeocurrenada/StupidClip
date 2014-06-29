@@ -5,7 +5,7 @@ o = None
 
 def update():
     """Revisa las tareas y las agrega a la lista de mensajes."""
-    pass
+    o.update()
 
 
 def cmd(s):
@@ -49,4 +49,4 @@ def init(dir):
     """Informa que la aplicacion ha iniciado."""
     from main import MainClass
     global o
-    o = MainClass()
+    o = MainClass(dir)
