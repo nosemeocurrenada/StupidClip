@@ -1,0 +1,28 @@
+Este archivo define los metodos expuestos del back-end.
+
+update ():
+  Revisa las tareas y las agrega a la lista de mensajes.
+
+cmd (s):
+  Parsea s, ejecuta la orden especificada, y agrega su resultado en la lista de mensajes.
+  
+get_new_msg ():
+  Devuelve los mensajes marcados como no enviados, y marca todos los que envia como marcados.
+  
+get_all_msg (n):
+  Devuelve los ultimos n mensajes en la lista, si n no esta especificado (o es None), devuelve todos.
+  
+options_get (key):
+  Devuelve el valor de la opcion con clave especificada.
+
+options_set (key, value):
+  Asigna value a la opcion con la clave especificada.
+  
+profile_get (key):
+  Devuelve el valor del campo de perfil con la clave especificada.
+  
+options_set (key, value):
+  Asigna value al campo de perfil con la clave especificada.
+  
+init ():
+  Informa que la aplicacion ha iniciado.
