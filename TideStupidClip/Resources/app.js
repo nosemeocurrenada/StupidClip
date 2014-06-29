@@ -138,9 +138,13 @@ App.ChatModel = Ember.Object.extend({
         this.set("messages", []);
         logger.log("inicializando chat model");
         var msgs = window.py.get_all_msg();
+        var me = this;
         msgs.forEach(function(e) {
-            this.messages.pushObject(e);
+            me.messages.pushObject(e);
         });
+        var c = me.messages.length - 12;
+        if (c > 0)
+            me.messages.removeAt(0, c);
         logger.log("chat model correctamente inicializado");
     }
 });
@@ -166,17 +170,20 @@ App.ChatRoute = Ember.Route.extend({
             var msgs = window.py.get_new_msg();
 
             if (msgs.length > 0) {
-                logger.log("hubo mensajes nuevos")
-                var m = me.get("this.model");
-                msgs.forEach(function(e) {
-                    logger.log(e);
-                    m.messages.pushObject(e);
-                });
-                logger.log("todos los mensajes ahora son");
-                me.get("this.model").messages.forEach(function(e) {
-                    logger.log(e);
-                });
-                //alert("hay mensajes nuevos");
+                try {
+                    logger.log("hubo mensajes nuevos")
+                    var m = me.modelFor("chat");
+                    msgs.forEach(function(e) {
+                        m.messages.pushObject(e);
+                    });
+                    var c = m.messages.length - 12;
+                    if (c > 0)
+                        m.messages.removeAt(0, c);
+
+                    //alert("hay mensajes nuevos");
+                } catch (err) {
+                    logger.log(err);
+                }
             }
 
         }, 1000));
@@ -188,7 +195,8 @@ App.ChatRoute = Ember.Route.extend({
     update: null,
     hideEvent: null,
     model: function() {
-        return App.ChatModel.create();
+        var m = App.ChatModel.create();
+        return m;
     },
     setupController: function(controller, m) {
         logger.log("seteando modelo del controlador");
