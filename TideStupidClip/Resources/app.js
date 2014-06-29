@@ -73,10 +73,19 @@ App = Ember.Application.create({
     }
 });
 
-App.Router.map(function() {});
-
+App.Router.map(function() {
+    this.route("chat");
+    this.route("options");
+    this.route("notification");
+});
 
 App.IndexRoute = Ember.Route.extend({
+    beforeModel: function() {
+        this.transitionTo('chat');
+    }
+});
+
+App.ChatRoute = Ember.Route.extend({
     model: function() {
         /*
         var m = App.TaskList.create();
@@ -94,7 +103,7 @@ App.IndexRoute = Ember.Route.extend({
     }
 });
 
-App.IndexController = Ember.Controller.extend({
+App.ChatController = Ember.Controller.extend({
     actions: {
         closeApp: function() {
             logger.log("closing app");
