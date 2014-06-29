@@ -1,4 +1,4 @@
- # -*- coding: latin-1 -*-
+# -*- coding: latin-1 -*-
 counter = 122
 
 
@@ -9,4 +9,5 @@ def testPython():
 
 
 def transformString(s):
+    s = s.replace('ñ', 'Ñ')
     return s.upper()
