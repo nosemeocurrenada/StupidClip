@@ -35,9 +35,15 @@
                             
 
                             {{#each msg in model.messages }}
+                            {{#if msg.isPc}}
+                                <div class="scmessage-pc">
+                                    {{msg.message}}
+                                </div>
+                            {{else}}
                                 <div class="scmessage">
                                     {{msg.message}}
                                 </div>
+                            {{/if}}
                             {{/each}}
 
                         </div>
@@ -79,10 +85,10 @@
 
         <script type="text/x-handlebars" id="notification">
             <div class="scvista">
-                <div class="scnotif">
+                <div class="scnotif" {{action "showChat"}}>
                     <div class="scnotiftop">
-                        <div class="scright">
-                        {{#link-to 'chat'}} X {{/link-to}}
+                        <div class="btn-lg scright">
+                        <span class="glyphicon glyphicon-remove" {{action "hide"}}></span>
                         </div>
 
                     </div>

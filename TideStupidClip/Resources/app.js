@@ -68,7 +68,7 @@ App = Ember.Application.create({
         var height = w.getHeight();
         var wwidth = window.screen.width;
         var wheight = window.screen.height;
-        w.moveTo(wwidth - width, wheight - height);
+        w.moveTo(wwidth - width, wheight - height - 30);
     },
     lostFocusRecently: false,
     lostFocus: function() {
@@ -99,6 +99,13 @@ App.IndexRoute = Ember.Route.extend({
     }
 });
 
+function parseMsg(msg) {
+    return {
+        message: msg.message,
+        timstamp: msg.timestamp.strftime("%H:%S"),
+        isPc: msg.sender == "System"
+    }
+};
 
 
 App.ChatModel = Ember.Object.extend({
@@ -110,7 +117,7 @@ App.ChatModel = Ember.Object.extend({
         var msgs = window.py.get_all_msg();
         var me = this;
         msgs.forEach(function(e) {
-            me.messages.pushObject(e);
+            me.messages.pushObject(parseMsg(e));
         });
         var c = me.messages.length - 12;
         if (c > 0)
@@ -151,7 +158,7 @@ App.IdleRoute = Ember.Route.extend({
                     var m = me.modelFor("idle");
                     m.set("lastMessages", msgs);
                     msgs.forEach(function(e) {
-                        m.messages.pushObject(e);
+                        m.messages.pushObject(parseMsg(e));
                     });
                     var c = m.messages.length - 12;
                     if (c > 0)
@@ -209,7 +216,7 @@ App.ChatRoute = Ember.Route.extend({
                     var m = me.modelFor("chat");
                     m.set("lastMessages", msgs);
                     msgs.forEach(function(e) {
-                        m.messages.pushObject(e);
+                        m.messages.pushObject(parseMsg(e));
                     });
                     var c = m.messages.length - 12;
                     if (c > 0)
@@ -311,7 +318,7 @@ App.NotificationRoute = Ember.Route.extend({
                     var m = me.modelFor("chat");
                     m.set("lastMessages", msgs);
                     msgs.forEach(function(e) {
-                        m.messages.pushObject(e);
+                        m.messages.pushObject(parseMsg(e));
                     });
                     var c = m.messages.length - 12;
                     if (c > 0)
@@ -329,6 +336,16 @@ App.NotificationRoute = Ember.Route.extend({
         window.clearInterval(this.get("update"));
     },
     update: null,
+    actions: {
+        hide: function() {
+            logger.log("ocultadisimo");
+            App.hideWindow();
+        },
+        showChat: function() {
+            logger.log("mostrando chat");
+            this.transitionTo("chat");
+        }
+    }
 })
 
 
