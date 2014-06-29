@@ -7,9 +7,8 @@ import interface
 import unittest
 
 class Test(unittest.TestCase):
-
     def setUp(self):
-        interface.init(".")
+        interface.init(None)
 
     def tearDown(self):
         pass

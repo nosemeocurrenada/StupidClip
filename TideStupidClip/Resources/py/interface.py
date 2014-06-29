@@ -11,7 +11,14 @@ def update():
 def cmd(s):
     """Parsea s, ejecuta la orden especificada, y agrega su
     resultado en la lista de mensajes. Devuelve True si encuentra una accion."""
-    return o.execute_command(s)
+    try:
+        return o.execute_command(s)
+    except Exception, e:
+        import traceback
+        tb = traceback.format_exc()
+        print "Stacktrace: " + tb
+        print "Error :" + e.message
+        return False
 
 
 def get_new_msg():
@@ -27,22 +34,19 @@ def get_all_msg(n = None):
 
 def options_get(key):
     """Devuelve el valor de la opcion con clave especificada."""
-    pass
-
+    return o.options_get(key)
 
 def options_set(key, value):
     """Asigna value a la opcion con la clave especificada."""
-    pass
-
+    o.options_set(key,value)
 
 def profile_get(key):
     """Devuelve el valor del campo de perfil con la clave especificada."""
-    pass
-
+    return o.profile_get(key)
 
 def profile_set(key, value):
     """Asigna value al campo de perfil con la clave especificada."""
-    pass
+    o.profile_set(key,value)
 
 
 def init(dir):

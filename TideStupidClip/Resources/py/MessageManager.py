@@ -7,11 +7,14 @@ class MessageManager():
         from Message import Message
         if not isinstance(message, Message):
             raise TypeError("message parameter (1) should be instance of Message")
+#        print "Agregando mensaje " + message.message
         self.messages.append(message)
+#        print "Mensajes " + ",".join([m.message for m in self.messages])
         
     def get_new_messages (self):
         msg = self.messages[self.index:]
         self.index = len(self.messages)
+#        print "New index set to " + str(self.index)
         return msg
     
     def get_all_messages (self, n = None):

@@ -12,7 +12,7 @@ class ActionManager ():
     def execute (self, s):
         a = self._match (s)
         if a:
-            a.execute()
+            a.execute(s)
             return True
         return False
     
