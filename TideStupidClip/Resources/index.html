@@ -23,11 +23,11 @@
             </div>
     		<div style="padding: 20px">
                 {{#each msg in model.messages }}
-                    <p>{{msg}}</p>
+                    <span>{{msg.message}}</span><br/>
                 {{/each}}
     		</div>
             <div style="padding: 20px">
-                <button {{action "sendMessage"}}>send message</button>
+                {{view Ws.FocusableTextField enterPress="sendCommand" value=command}}
             </div>
 		</script>
 
@@ -57,6 +57,17 @@
             </div>
         </script>
 
+        <script type="text/x-handlebars" id="notification">
+            <div style="padding: 20px">
+                {{#link-to 'chat'}} Ok {{/link-to}}
+            </div>
+            <div style="padding: 20px">
+                Notification:<br/>
+                {{#each msg in model.lastMessages}}
+                <span>{{msg.message}}</span><br/>
+                {{/each}}
+            </div>
+        </script>
 
         <script>
             window.py = {}
