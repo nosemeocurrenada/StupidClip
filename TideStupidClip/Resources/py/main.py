@@ -12,7 +12,7 @@ class MainClass:
         self.index = len(self.messages) - 1
         return msg
     
-    def get_all_messages (self, n):
+    def get_all_messages (self, n = None):
         if not n: #It could be None
             n = 0
         return self.messages[-n:]
