@@ -19,8 +19,7 @@ class Test(unittest.TestCase):
         interface.cmd("Dame la hora")
         messages = interface.get_new_msg()
         self.assertEqual(1, len(messages), "It should have only one message")
-        from datetime import datetime
-        self.assertTrue(type(messages[0]) is datetime, "Should return a date")
+        self.assertEqual(2, len(messages [0].split(":")), "Should return a date with format HH:MM")
 
     def testGetsAllMessages(self):
         interface.cmd("Dame la hora")

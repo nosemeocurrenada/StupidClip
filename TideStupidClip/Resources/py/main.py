@@ -22,7 +22,9 @@ class MainClass:
     
     def _get_time(self):
         from datetime import datetime
-        self.messages.append(datetime.now())
+        now = datetime.now()
+        s = now.strftime("%H:%S")
+        self.messages.append(s)
     
     def _dirty_add_actions(self):
         from StringAction import StringAction
