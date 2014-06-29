@@ -1,5 +1,5 @@
 class ActionManager ():
-    def __init__(self, message_manager = None):
+    def __init__(self, message_manager):
         self.actions = []
         self.message_manager = message_manager
     
@@ -25,6 +25,7 @@ class ActionManager ():
             s = "Ambiguity: " + "[" + ",".join([e.name for e in res]) + "]"
             m = SystemMessage(s)
             self.message_manager.add(m)
+            return None
         if len(res) == 1:
             return res [0]
         self.message_manager.add (SystemMessage("Command not found: " + s))

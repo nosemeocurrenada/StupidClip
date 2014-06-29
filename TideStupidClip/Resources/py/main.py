@@ -2,10 +2,10 @@ from datetime import datetime, timedelta
 class MainClass:
     
     def __init__(self, dir):
-        from action_manager import ActionManager
-        self.action_manager = ActionManager()
         from MessageManager import MessageManager
         self.message_manager = MessageManager()
+        from action_manager import ActionManager
+        self.action_manager = ActionManager(self.message_manager)
         self._dirty_add_actions()
         self.tasks = []
     
