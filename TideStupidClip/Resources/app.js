@@ -135,9 +135,12 @@ App.IdleRoute = Ember.Route.extend({
 App.ChatModel = Ember.Object.extend({
     messages: [],
     init: function() {
+        this.set("messages", []);
         logger.log("inicializando chat model");
         var msgs = window.py.get_all_msg();
-        this.set("messages", msgs.slice(-20));
+        msgs.forEach(function(e) {
+            this.messages.pushObject(e);
+        });
         logger.log("chat model correctamente inicializado");
     }
 });
@@ -164,9 +167,15 @@ App.ChatRoute = Ember.Route.extend({
 
             if (msgs.length > 0) {
                 logger.log("hubo mensajes nuevos")
-                var m = me.get("model.messages");
-                m.push(msgs);
-                me.set("model.messages", m);
+                var m = me.get("this.model");
+                msgs.forEach(function(e) {
+                    logger.log(e);
+                    m.messages.pushObject(e);
+                });
+                logger.log("todos los mensajes ahora son");
+                me.get("this.model").messages.forEach(function(e) {
+                    logger.log(e);
+                });
                 //alert("hay mensajes nuevos");
             }
 
@@ -180,10 +189,16 @@ App.ChatRoute = Ember.Route.extend({
     hideEvent: null,
     model: function() {
         return App.ChatModel.create();
+    },
+    setupController: function(controller, m) {
+        logger.log("seteando modelo del controlador");
+        logger.debug("this is the controller: " + controller);
+        logger.debug("model name: " + m.name);
+        controller.set("model", m);
     }
 });
 
-App.ChatController = Ember.ObjectController.extend({
+App.ChatController = Ember.Controller.extend({
     actions: {
         sendMessage: function() {
             logger.log("enviando mensaje dame la hora");
