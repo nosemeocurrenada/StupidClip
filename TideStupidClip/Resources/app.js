@@ -119,7 +119,7 @@ App.ChatModel = Ember.Object.extend({
         msgs.forEach(function(e) {
             me.messages.pushObject(parseMsg(e));
         });
-        var c = me.messages.length - 12;
+        var c = me.messages.length - 10;
         if (c > 0)
             me.messages.removeAt(0, c);
         logger.log("chat model correctamente inicializado");
@@ -160,7 +160,7 @@ App.IdleRoute = Ember.Route.extend({
                     msgs.forEach(function(e) {
                         m.messages.pushObject(parseMsg(e));
                     });
-                    var c = m.messages.length - 12;
+                    var c = m.messages.length - 10;
                     if (c > 0)
                         m.messages.removeAt(0, c);
 
@@ -218,7 +218,7 @@ App.ChatRoute = Ember.Route.extend({
                     msgs.forEach(function(e) {
                         m.messages.pushObject(parseMsg(e));
                     });
-                    var c = m.messages.length - 12;
+                    var c = m.messages.length - 10;
                     if (c > 0)
                         m.messages.removeAt(0, c);
 
@@ -320,7 +320,7 @@ App.NotificationRoute = Ember.Route.extend({
                     msgs.forEach(function(e) {
                         m.messages.pushObject(parseMsg(e));
                     });
-                    var c = m.messages.length - 12;
+                    var c = m.messages.length - 10;
                     if (c > 0)
                         m.messages.removeAt(0, c);
 
