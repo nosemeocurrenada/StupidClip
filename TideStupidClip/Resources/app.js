@@ -18,7 +18,7 @@ App = Ember.Application.create({
         logger.log("python ready");
 
         var me = this;
-        var tray = Ti.UI.addTray("app://app_logo.png", function() {
+        var tray = Ti.UI.addTray("app://assets/logo_min.png", function() {
             me.trayClicked();
         });
         this.set("tray", tray);
@@ -145,6 +145,8 @@ App.IdleRoute = Ember.Route.extend({
 
             if (msgs.length > 0) {
                 try {
+                    App.showWindow();
+
                     logger.log("hubo mensajes nuevos")
                     var m = me.modelFor("idle");
                     m.set("lastMessages", msgs);
@@ -158,7 +160,6 @@ App.IdleRoute = Ember.Route.extend({
 
                     windowShowEvent.remove(me.get("showEvent"));
                     me.transitionTo("notification");
-                    App.showWindow();
                     //alert("hay mensajes nuevos");
                 } catch (err) {
                     logger.log(err);
@@ -168,8 +169,13 @@ App.IdleRoute = Ember.Route.extend({
         }, 1000));
     },
     deactivate: function() {
-        windowShowEvent.remove(this.get("showEvent"));
+        try {
+            windowShowEvent.remove(this.get("showEvent"));
+        } catch (err) {
+            logger.log(err);
+        }
         window.clearInterval(this.get("update"));
+
     },
     model: function() {
         return uniqueChatModelInstance;
@@ -294,6 +300,7 @@ App.NotificationRoute = Ember.Route.extend({
         //update
         this.set("update", window.setInterval(function() {
             logger.log("notification update");
+
             window.py.update();
 
             var msgs = window.py.get_new_msg();

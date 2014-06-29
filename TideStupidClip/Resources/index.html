@@ -3,7 +3,7 @@
 		<meta charset="utf-8">
 		<title>YaYa</title>
 		<link rel="stylesheet" href="app://css/normalize.css">
-		<link rel="stylesheet" type="text/css" href="app://js/easyUI/themes/metro/easyui.css">
+        <link rel="stylesheet" href="app://css/bootstrap.css">
 		<link rel="stylesheet" href="app://css/style.css">
 		<style>
 			.left {
@@ -20,12 +20,15 @@
         <script type="text/x-handlebars" id="chat">
             <div class="scvista">
                 <div class="sctabs">
-                    <div class="scfaceon"></div>
-                    <div class="scgireoff">
-                        {{#link-to 'options'}} Opt {{/link-to}}
+                    <div class="btn-lg scfaceon">
+                        <span class="glyphicon glyphicon-comment"></span>
+                    </div>
+                    <div class="btn-lg scgireoff">
+                        {{#link-to 'options'}} <span class="glyphicon glyphicon-cog"></span> {{/link-to}}
                     </div>
                 </div>
-                <div class="scclear"></div>
+                <div class="scclear">
+                </div>
                 <div class="sccontent">
                     <div class="scmessages">
                         <div class="scinernalshadow">
@@ -48,62 +51,47 @@
                     </div>
                 </div>
             </div>
-
-
         </script>
-
-
-
-
-
-        <script type="text/x-handlebars" id="chat_ok">
-
-            <div style="padding: 20px">
-                <a>chat</a>
-            </div>
-            <div style="padding: 20px">
-            </div>
-            <div style="padding: 20px">
-                
-            </div>
-
-		</script>
 
         <script type="text/x-handlebars" id="options">
-            <div style="padding: 20px">
-                <a>options</a>,
-                {{#link-to 'chat'}} Chat {{/link-to}}
-            </div>
-            <div style="padding: 20px">
-                <div>
-                <p>This is the options panel</p>
+            <div class="scvista">
+                <div class="sctabs">
+                    <div class="btn-lg scgireoff">
+                        {{#link-to 'chat'}} 
+                        <span class="glyphicon glyphicon-comment"></span> {{/link-to}}
+                    </div>
+                    <div class="btn-lg scfaceon"><span class="glyphicon glyphicon-cog"></span> </div>
                 </div>
-                <button {{action "closeApp"}}>exit</button>
+                <div class="scclear"></div>
+                <div class="sccontent">
+
+                    <div class="">
+                        This is the options panel
+                    </div>
+                    
+                    <button {{action "closeApp"}}>exit</button>
+                </div>
             </div>
         </script>
 
-
         <script type="text/x-handlebars" id="idle">
-            <div style="padding: 20px">
-                {{#link-to 'options'}} Options {{/link-to}}
-                {{#link-to 'chat'}} Chat {{/link-to}}
-            </div>
-            <div style="padding: 20px">
-                <div>
-                <p>Im idle</p>
-                </div>
-            </div>
         </script>
 
         <script type="text/x-handlebars" id="notification">
-            <div style="padding: 20px">
-                {{#link-to 'chat'}} Ok {{/link-to}}
-            </div>
-            <div style="padding: 20px">
-                Notification:<br/>
-                {{#each msg in model.lastMessages}}
-                <span>{{msg.message}}</span><br/>
-                {{/each}}
+            <div class="scvista">
+                <div class="scnotif">
+                    <div class="scnotiftop">
+                        <div class="scright">
+                        {{#link-to 'chat'}} X {{/link-to}}
+                        </div>
+
+                    </div>
+                    <div class="scnotifcontent">
+                        {{#each msg in model.lastMessages}}
+                        <span>{{msg.message}}</span><br/>
+                        {{/each}}
+                    </div>
+                </div>
             </div>
         </script>
 

@@ -30,9 +30,10 @@ body, html {
 	background-color: #CCC;
 	float: right;
 	margin-right: 7px;
-	width: 49px;
+	width: 52px;
 	height: 30px;
 
+	border-radius: 0px;
 	border-top-right-radius: 3px;
 	border-top-left-radius: 3px;
 
@@ -44,14 +45,16 @@ body, html {
 	background-color: gray;
 	float: right;
 	margin-right: 7px;
-	width: 49px;
+	width: 52px;
 	height: 30px;
+	padding-left: -3px;
 
+	border-radius: 0px;
 	border-top-right-radius: 3px;
 	border-top-left-radius: 3px;
 
 	border-top: 1px solid #999;
-	border-left: 1px solid #999;	
+	border-left: 1px solid #999;
 }
 
 .sccontent {
@@ -75,7 +78,7 @@ body, html {
 	margin-left: 14px;
 	margin-bottom: 7px;
 	width: 272px;
-	height: 298px;
+	height: 302px;
 
 	border-top-right-radius: 3px;
 	border-top-left-radius: 3px;
@@ -87,11 +90,11 @@ body, html {
 .sctextfield {
 	background-color: white;
 	margin-right: 14px;
-	margin-left: 14px;
+	margin-left: 14px;	
 	margin-top: 14px;
 	margin-bottom: 7px;
 	width: 272px;
-	height: 22px;
+	height: 23px;
 
 	border-top-right-radius: 3px;
 	border-top-left-radius: 3px;
@@ -120,4 +123,30 @@ body, html {
 	padding: 3px;
 	background-color: #FEFEFE;
 	margin: 3px;
+}
+
+.scnotif {
+	background-color: #CCC;
+	width: 300px;
+	height: 70px;
+	clear: both;
+
+	margin-top: 330px;
+
+	border-radius: 5px;
+
+	border-top: 1px solid #DDD;
+	border-left: 1px solid #DDD;	
+}
+
+.scvista {
+	width: 300px;
+	height: 400px;
+}
+.scright {
+	float: right;
+}
+
+a {
+	color: #FF8524; //#FF7519;
 }
