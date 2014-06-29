@@ -34,7 +34,7 @@ class MainClass:
     def _add_task(self, *args):
         t = datetime.now() + timedelta(seconds = 5)
         from UserMessage import UserMessage
-        m = UserMessage(self.options["name"] + ", no te duermas.")
+        m = UserMessage(self.profile["name"] + ", no te duermas.")
         task = {'time':t,'message':m}
         self.tasks.append(task)
         self.message_manager.add(UserMessage("Ok, te aviso en 5s"))

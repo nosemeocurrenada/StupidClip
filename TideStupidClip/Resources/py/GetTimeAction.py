@@ -1,7 +1,7 @@
-from Action import Action
-class GetTimeAction(Action):
+from RegexAction import RegexAction
+class GetTimeAction(RegexAction):
     def __init__(self, message_manager):
-        Action.__init__(self,self._get_time)
+        RegexAction.__init__(self,self._get_time)
         self.name = "GetTimeAction" + str(self.uid)
         self.message_manager = message_manager
         
@@ -14,9 +14,5 @@ class GetTimeAction(Action):
         self.message_manager.add(m)
 
     def matches(self, s):
-        s = s.lower()
-        h = ["dame", "dime", "decime"]
-        for k in h:
-            if k == s[:len(k)] and "hora" in s: 
-                return True
-        return False
+        pattern = r'(?:dime|decime|dame) (?:la hora|que hora es)'
+        return RegexAction.matches(self,pattern,s)
