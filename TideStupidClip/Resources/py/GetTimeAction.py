@@ -1,9 +1,9 @@
 from RegexAction import RegexAction
 class GetTimeAction(RegexAction):
-    def __init__(self, message_manager):
+    def __init__(self, main):
         RegexAction.__init__(self,self._get_time)
         self.name = "GetTimeAction" + str(self.uid)
-        self.message_manager = message_manager
+        self.message_manager = main.message_manager
         
     def _get_time(self, *args):
         from datetime import datetime

@@ -11,7 +11,7 @@ class ReminderAction(RegexAction):
         self.profile = mainclass.profile
         self.pattern = r'(?:avisame) (?:que|de) (\w+) en (\d+)(m| minutos|s| segundos)'
         
-    def _schelude_task(self, *args):
+    def _schelude_task(self, action, number, unit):
         import re
         action, number, unit = re.match(self.pattern,args[0]).groups()
         

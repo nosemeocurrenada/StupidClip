@@ -6,6 +6,11 @@ class RegexAction(Action):
         
     def matches(self,pattern,s):
         import re
-        if re.match(pattern,s,re.IGNORECASE):
+        result = re.match(pattern,s,re.IGNORECASE)
+        if result:
+            self.command(*result.groups())
             return True
         return False
+    
+    def execute(self, *params):
+        pass

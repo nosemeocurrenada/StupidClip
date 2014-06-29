@@ -6,6 +6,8 @@ class MainClass:
         from action_manager import ActionManager
         self.action_manager = ActionManager(self.message_manager)
         self.tasks = []
+        from TodoManager import TodoManager
+        self.todo_manager = TodoManager()
         
         if dir:
             import os
@@ -18,7 +20,10 @@ class MainClass:
             
             if not self.profile.has_key("name"):
                 self.profile["name"] = "DefaultCarlos"
-                
+        else:
+            self.options = {}
+            self.profile = {"name":"DefaultCarlos"}
+        
         self._dirty_add_actions()
     
     def get_new_messages (self):
@@ -73,6 +78,10 @@ class MainClass:
         self.action_manager.add(act)
         act = StringAction(self._say_hi,"Hola")
         self.action_manager.add(act)
+        from SetTaskAction import SetTaskAction
+        self.action_manager.add(SetTaskAction(self))
+        from GetTaskAction import GetTaskAction
+        self.action_manager.add(GetTaskAction(self))
 
     def profile_set(self,key,value):
         self.profile[key] = value
