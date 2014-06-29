@@ -13,7 +13,7 @@
 <id>initial</id>
 <title>StupidClip</title>
 <url>app://index.html</url>
-<width>400</width>
+<width>300</width>
 <max-width>3000</max-width>
 <min-width>0</min-width>
 <height>400</height>
@@ -22,8 +22,9 @@
 <fullscreen>false</fullscreen>
 <resizable>false</resizable>
 <chrome scrollbars="false">false</chrome>
-<maximizable>true</maximizable>
-<minimizable>true</minimizable>
-<closeable>true</closeable>
+<maximizable>false</maximizable>
+<minimizable>false</minimizable>
+<closeable>false</closeable>
+<transparent-background>true</transparent-background>
 </window>
 </ti:app>
