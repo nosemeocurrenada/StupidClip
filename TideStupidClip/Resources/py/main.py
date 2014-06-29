@@ -3,20 +3,16 @@ class MainClass:
     def __init__(self):
         from action_manager import ActionManager
         self.action_manager = ActionManager()
-        self.messages = []
-        self.index = 0
+        from MessageManager import MessageManager
+        self.message_manager = MessageManager()
         self._dirty_add_actions()
     
     def get_new_messages (self):
-        msg = self.messages[self.index:]
-        self.index = len(self.messages) - 1
-        return msg
+        return self.message_manager.get_new_messages()
     
     def get_all_messages (self, n = None):
-        if not n: #It could be None
-            n = 0
-        return self.messages[-n:]
-    
+        return self.message_manager.get_all_messages(n)
+        
     def execute_command(self, cmd):
         self.action_manager.execute(cmd)
     
@@ -24,7 +20,9 @@ class MainClass:
         from datetime import datetime
         now = datetime.now()
         s = now.strftime("%H:%S")
-        self.messages.append(s)
+        from Message import Message
+        m = Message(s,"System")
+        self.message_manager.add(m)
     
     def _dirty_add_actions(self):
         from StringAction import StringAction
