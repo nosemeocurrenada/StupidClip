@@ -135,7 +135,8 @@ App.IdleRoute = Ember.Route.extend({
 App.ChatModel = Ember.Object.extend({
     messages: [],
     init: function() {
-        this.set("messages", window.py.get_all_msg(20));
+        //window.py.get_all_msg(20)
+        this.set("messages", []);
     }
 });
 
