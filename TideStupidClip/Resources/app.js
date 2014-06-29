@@ -135,8 +135,10 @@ App.IdleRoute = Ember.Route.extend({
 App.ChatModel = Ember.Object.extend({
     messages: [],
     init: function() {
-        //window.py.get_all_msg(20)
+        logger.log("inicializando chat model");
+        var msgs = window.py.get_all_msg();
         this.set("messages", []);
+        logger.log("chat model correctamente inicializado");
     }
 });
 
@@ -158,7 +160,7 @@ App.ChatRoute = Ember.Route.extend({
 
             window.py.update();
 
-            msgs = window.py.get_new_msg();
+            var msgs = window.py.get_new_msg();
 
             if (msgs.length > 0) {
                 alert("hay mensajes nuevos");
