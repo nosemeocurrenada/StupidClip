@@ -4,7 +4,8 @@ update ():
   Revisa las tareas y las agrega a la lista de mensajes.
 
 cmd (s):
-  Parsea s, ejecuta la orden especificada, y agrega su resultado en la lista de mensajes.
+  Parsea s, ejecuta la orden especificada, y agrega su resultado en la 
+lista de mensajes. Devuelve True si logra encontrar una accion.
   
 get_new_msg ():
   Devuelve los mensajes marcados como no enviados, y marca todos los que envia como marcados.

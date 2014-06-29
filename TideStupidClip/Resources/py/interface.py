@@ -1,6 +1,7 @@
 # -*- coding: latin-1 -*-
 """Este archivo define los metodos expuestos del back-end."""
 
+o = None
 
 def update():
     """Revisa las tareas y las agrega a la lista de mensajes."""
@@ -9,14 +10,14 @@ def update():
 
 def cmd(s):
     """Parsea s, ejecuta la orden especificada, y agrega su
-    resultado en la lista de mensajes."""
-    return "jaja, you find me"
+    resultado en la lista de mensajes. Devuelve True si encuentra una accion."""
+    return o.execute_command(s)
 
 
 def get_new_msg():
     """Devuelve los mensajes marcados como no enviados, y
     marca todos los que envia como marcados."""
-    pass
+    return o.get_new_messages ()
 
 
 def get_all_msg(n):
@@ -45,6 +46,8 @@ def profile_set(key, value):
     pass
 
 
-def init():
+def init(clean = False):
     """Informa que la aplicacion ha iniciado."""
-    pass
+    from main import MainClass
+    global o
+    o = MainClass()
