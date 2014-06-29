@@ -82,6 +82,9 @@ class MainClass:
         self.action_manager.add(SetTaskAction(self))
         from GetTaskAction import GetTaskAction
         self.action_manager.add(GetTaskAction(self))
+        from SetNameAction import SetNameAction
+        self.action_manager.add(SetNameAction(self))
+
 
     def profile_set(self,key,value):
         self.profile[key] = value

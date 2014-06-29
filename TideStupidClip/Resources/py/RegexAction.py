@@ -6,7 +6,7 @@ class RegexAction(Action):
         
     def matches(self,pattern,s):
         import re
-        result = re.match(pattern,s,re.IGNORECASE)
+        result = re.match(pattern,s,re.IGNORECASE | re.MULTILINE)
         if result:
             self.command(*result.groups())
             return True
