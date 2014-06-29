@@ -1,6 +1,7 @@
 class ActionManager ():
-    def __init__(self):
+    def __init__(self, message_manager = None):
         self.actions = []
+        self.message_manager = message_manager
     
     def add(self,act):
         from Action import Action
@@ -9,17 +10,22 @@ class ActionManager ():
         self.actions.append(act)
     
     def execute (self, s):
-        self._match (s).execute()    
+        a = self._match (s)
+        if a:
+            a.execute()    
     
     def _match (self,s):
         res = []
         for action in self.actions:
             if action.matches (s):
                 res.append(action)
+                
+        from SystemMessage import SystemMessage
         if len(res) > 1:
-            # Should put an ambuiguity message in the bag
-            raise Error("Ambiguity")
+            s = "Ambiguity: " + "[" + ",".join([e.name for e in res]) + "]"
+            m = SystemMessage(s)
+            self.message_manager.add(m)
         if len(res) == 1:
             return res [0]
-        # Should put an not found message in the bag
+        self.message_manager.add (SystemMessage("Command not found: " + s))
         return None 

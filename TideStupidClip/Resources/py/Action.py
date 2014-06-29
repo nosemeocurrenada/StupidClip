@@ -6,9 +6,12 @@ Created on 29/06/2014
 
 class Action():
     '''
-    classdocs
+    Clase base para las acciones
+        command : funcion a ejecutar
+        name : nombre para propositos de debug
+        uid : id para propositos de debug
     '''
-
+    uid = 0
 
     def __init__(self, command):
         '''
@@ -16,6 +19,9 @@ class Action():
             command : function to be called on execute ()
         '''
         self.command = command
+        self.uid = Action.uid
+        Action.uid += 1
+        self.name = "Action" + str(self.uid)
     
     def matches (self, s):
         """

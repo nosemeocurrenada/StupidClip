@@ -14,14 +14,16 @@ class MainClass:
         return self.message_manager.get_all_messages(n)
         
     def execute_command(self, cmd):
+        from UserMessage import UserMessage
+        self.message_manager.add(UserMessage(cmd))
         self.action_manager.execute(cmd)
     
     def _get_time(self):
         from datetime import datetime
         now = datetime.now()
         s = now.strftime("%H:%S")
-        from Message import Message
-        m = Message(s,"System")
+        from SystemMessage import SystemMessage
+        m = SystemMessage(s)
         self.message_manager.add(m)
     
     def _dirty_add_actions(self):
