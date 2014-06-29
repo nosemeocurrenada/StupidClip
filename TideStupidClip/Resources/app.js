@@ -99,6 +99,12 @@ App.IndexController = Ember.Controller.extend({
         closeApp: function() {
             logger.log("closing app");
             Ti.UI.getCurrentWindow().close();
+        },
+        testPython: function() {
+            logger.log("python test");
+            var s = window.testPython();
+            s = s + " " + window.transformString("Asereje ñ");
+            alert(s);
         }
     }
 });

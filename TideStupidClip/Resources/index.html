@@ -19,11 +19,21 @@
 		<script type="text/x-handlebars" id="index">
 		<div style="padding: 20px">
 			<div>
-            This is a sample application
+            <p>This is a sample application showing python functionality</p>
+            <p>this one have a counter and sends a string "Asereje ñ" from JS to python and back transformed to uppercase</p>
 			</div>
 			<button {{action "closeApp"}}>exit</button>
+            <button {{action "testPython"}}>Test python</button>
 		</div>
 		</script>
+
+        <script type="text/python">
+            import myfile
+
+            window.testPython = myfile.testPython
+            window.transformString = myfile.transformString
+
+        </script>
 
 		<script src="app://js/jquery-1.10.2.js"></script>
 		<script src="app://js/easyUI/jquery.easyui.min.js"></script>
